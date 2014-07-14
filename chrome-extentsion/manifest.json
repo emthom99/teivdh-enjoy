@@ -1,0 +1,26 @@
+{
+	"name":"Enjoy HdViet",
+	"version":"1.0",
+	"content_scripts":[
+		{
+			"matches":[
+				"*://movies.hdviet.com/*"
+				],
+			"css":["page.css"]
+		}
+	],
+	"permissions":[
+		"activeTab",
+		"webRequest",
+		"webRequestBlocking",
+		"*://movies.hdviet.com/*.xml"
+	],
+	"background": {
+    	"scripts": ["event_page.js"],
+    	"persistent": true
+  	},
+	"icons":{
+		"128":"128.png"
+	},
+	"manifest_version":2
+}
