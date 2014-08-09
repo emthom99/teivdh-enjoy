@@ -8,17 +8,20 @@ chrome.webRequest.onHeadersReceived.addListener(
             }
           }
         };
-        var xmlId=/hdviet\.com\/(.*?)\.xml/.exec(details.url)[1];
-        var clientId = Math.random().toString(36).slice(2);
-        chrome.tabs.executeScript(null,{code: "sendXmlToServer("+xmlId+",'"+clientId+"')"});
-        sleep(3*1000);
-        newUrl=REDIRECT_HOST+"/getXml.php?xml_id="+xmlId+"&client_id="+clientId;
-        return {
-            redirectUrl: newUrl
-        };
+        var xmlId=/\/([^\/]*?)\.xml/.exec(details.url)[1];
+        if(xmlId!="crossdomain"){
+            var clientId = Math.random().toString(36).slice(2);
+            chrome.tabs.executeScript(null,{code: "sendXmlToServer('"+xmlId+"','"+clientId+"')"});
+            sleep(3*1000);
+            newUrl=REDIRECT_HOST+"/getXml.php?xml_id="+xmlId+"&client_id="+clientId;
+            return {
+                redirectUrl: newUrl
+            };
+        }
+        return;
     }, 
     {
-        urls: ["http://movies.hdviet.com/*.xml"]
+        urls: ["*://*/*.xml"]
     }, 
     ["blocking"]
 );

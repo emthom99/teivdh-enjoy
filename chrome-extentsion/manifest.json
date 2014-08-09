@@ -4,7 +4,8 @@
 	"content_scripts":[
 		{
 			"matches":[
-				"*://movies.hdviet.com/*"
+				"*://movies.hdviet.com/*",
+				"*://old.hdviet.com/*"
 				],
 			"css":["page.css"],
 			"js":["jquery.js","config.js","lib.js"]
@@ -14,7 +15,9 @@
 		"activeTab",
 		"webRequest",
 		"webRequestBlocking",
-		"*://movies.hdviet.com/*.xml"
+		"*://movies.hdviet.com/*.xml",
+		"*://old.hdviet.com/*.xml",
+		"*://ejoker.comuv.com/*.xml"
 	],
 	"background": {
     	"scripts": ["jquery.js","config.js","event_page.js"],
