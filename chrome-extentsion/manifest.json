@@ -6,7 +6,8 @@
 			"matches":[
 				"*://movies.hdviet.com/*"
 				],
-			"css":["page.css"]
+			"css":["page.css"],
+			"js":["jquery.js","config.js","lib.js"]
 		}
 	],
 	"permissions":[
@@ -16,7 +17,7 @@
 		"*://movies.hdviet.com/*.xml"
 	],
 	"background": {
-    	"scripts": ["event_page.js"],
+    	"scripts": ["jquery.js","config.js","event_page.js"],
     	"persistent": true
   	},
 	"icons":{
