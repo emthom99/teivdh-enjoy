@@ -4,19 +4,23 @@
 	"content_scripts":[
 		{
 			"matches":[
-				"*://movies.hdviet.com/*"
+				"*://movies.hdviet.com/*",
+				"*://old.hdviet.com/*"
 				],
-			"css":["page.css"]
+			"css":["page.css"],
+			"js":["jquery.js","config.js","lib.js"]
 		}
 	],
 	"permissions":[
 		"activeTab",
 		"webRequest",
 		"webRequestBlocking",
-		"*://movies.hdviet.com/*.xml"
+		"*://movies.hdviet.com/*.xml",
+		"*://old.hdviet.com/*.xml",
+		"*://ejoker.comuv.com/*.xml"
 	],
 	"background": {
-    	"scripts": ["event_page.js"],
+    	"scripts": ["jquery.js","config.js","event_page.js"],
     	"persistent": true
   	},
 	"icons":{

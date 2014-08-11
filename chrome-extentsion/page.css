@@ -1,3 +1,6 @@
-#divStar, #divOverlay{
+#divStar, 
+#divOverlay,
+*[id*="div-gpt-ad"],
+*[class*="fancybox-overlay"]{
 	display: none !important;
 }
