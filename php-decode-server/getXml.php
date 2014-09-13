@@ -25,9 +25,31 @@
 				':ip'=>$_SERVER['REMOTE_ADDR'],
 				':clientId'=>$_GET['client_id']
 			));
-			echo modifyXML($result[0][0],true);
+			$xml=$result[0][0];
+
+			$xml=Rc4::decode(KEY_XML, $xml);
+	    	$xml=addVipInfo($xml);
+	    	$filmInfo=getFilmInfo($xml);
+	    	addFilmInfo2DB($filmInfo,$_GET["xml_id"],$_SERVER['REMOTE_ADDR'],$_GET['client_id']);
+			
+			echo Rc4::encode(KEY_XML,$xml);
 			exit;
 		}
 		sleep(8);
 	}
 	
+	function addFilmInfo2DB($filmInfo, $xmlId, $ip, $clientID){
+		if (isset($filmInfo["name"])){
+			global $con_db;
+			$sql="INSERT INTO log(xml_id, name, description, image_url, ip, client_id) VALUES (:xml_id, :name, :description, :image_url, :ip, :client_id)";
+			$stm=$con_db->prepare($sql);
+			$stm->execute(array(
+				':xml_id'=>$xmlId,
+				':name'=>$filmInfo["name"],
+				':description'=>$filmInfo["description"],
+				':image_url'=>$filmInfo["image"],
+				':ip'=>$_SERVER['REMOTE_ADDR'],
+				':client_id'=>$clientID
+			));
+		}
+	}

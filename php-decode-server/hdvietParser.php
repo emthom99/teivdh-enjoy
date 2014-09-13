@@ -3,10 +3,18 @@
     require_once 'utl.php';
     require_once 'config.php';
 
+    function addVipInfo($xml){
+    	$xml=preg_replace('#<user.*?/>#', '<user hd="true" adver="false" vippass="true" p4="Pduccui" i="I1|I2|I3" />', $xml);
+	    $xml=preg_replace('#source="http://movies.hdviet.com/(.*?)"#', 'source="http://'.$_SERVER['SERVER_NAME'].'/\1"', $xml);
+	    return $xml;
+    }
+    function getFilmInfo($xml){
+    	$matched=preg_match('$<info\s+name="(?P<name>.*?)"\s+image="(?P<image>.*?)"\s+description="(?P<description>.*?)"$', $xml,$result);
+    	return $result;
+    }
     function modifyXML($xml,$bNeedEncode){
     	$xml=Rc4::decode(KEY_XML, $xml);
-		$xml=preg_replace('#<user.*?/>#', '<user hd="true" adver="false" vippass="true" p4="Pduccui" i="I1|I2|I3" />', $xml);
-	    $xml=preg_replace('#source="http://movies.hdviet.com/(.*?)"#', 'source="http://'.$_SERVER['SERVER_NAME'].'/\1"', $xml);
+    	$xml=addVipInfo($xml);
 	   	if($bNeedEncode)
 	   		$xml=Rc4::encode(KEY_XML,$xml);
 
