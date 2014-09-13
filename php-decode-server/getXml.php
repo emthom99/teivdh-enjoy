@@ -3,7 +3,7 @@
 	require_once("hdvietParser.php");
 
 	try {
-		$con_db=new PDO($connect_string,DB_USER,DB_PASSWORD);
+		$con_db=new PDO($connect_string,DB_USER,DB_PASSWORD,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	} catch (Exception $e) {
 		die('khong mo dc database'. $e->getMessage());
 	}
@@ -25,31 +25,8 @@
 				':ip'=>$_SERVER['REMOTE_ADDR'],
 				':clientId'=>$_GET['client_id']
 			));
-			$xml=$result[0][0];
-
-			$xml=Rc4::decode(KEY_XML, $xml);
-	    	$xml=addVipInfo($xml);
-	    	$filmInfo=getFilmInfo($xml);
-	    	addFilmInfo2DB($filmInfo,$_GET["xml_id"],$_SERVER['REMOTE_ADDR'],$_GET['client_id']);
-			
-			echo Rc4::encode(KEY_XML,$xml);
+			echo $result[0][0];
 			exit;
 		}
 		sleep(8);
-	}
-	
-	function addFilmInfo2DB($filmInfo, $xmlId, $ip, $clientID){
-		if (isset($filmInfo["name"])){
-			global $con_db;
-			$sql="INSERT INTO log(xml_id, name, description, image_url, ip, client_id) VALUES (:xml_id, :name, :description, :image_url, :ip, :client_id)";
-			$stm=$con_db->prepare($sql);
-			$stm->execute(array(
-				':xml_id'=>$xmlId,
-				':name'=>$filmInfo["name"],
-				':description'=>$filmInfo["description"],
-				':image_url'=>$filmInfo["image"],
-				':ip'=>$_SERVER['REMOTE_ADDR'],
-				':client_id'=>$clientID
-			));
-		}
 	}

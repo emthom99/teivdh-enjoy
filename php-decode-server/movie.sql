@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `image_url` text,
   `ip` varchar(50) DEFAULT '',
   `client_id` varchar(100) DEFAULT '',
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `create_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `xml_id` (`xml_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
