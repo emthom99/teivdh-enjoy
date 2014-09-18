@@ -1,5 +1,6 @@
 #divStar, 
 #divOverlay,
+#eyeDiv,
 *[id*="div-gpt-ad"],
 *[class*="fancybox-overlay"]{
 	display: none !important;
