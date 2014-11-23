@@ -3,7 +3,7 @@
 #eyeDiv,
 *[id*="div-gpt-ad"],
 *[class*="fancybox-overlay"],
-*[class*="adv"],
+*[class*="adv"]:not(.height-adv),
 *[id*="ep_ball"]{
 	display: none !important;
 }
