@@ -4,6 +4,7 @@
 *[id*="div-gpt-ad"],
 *[class*="fancybox-overlay"],
 *[class*="adv"]:not(.height-adv),
+*[class*="adscon"],
 *[id*="ep_ball"]{
 	display: none !important;
 }
